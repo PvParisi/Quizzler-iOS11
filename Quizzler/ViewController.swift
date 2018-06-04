@@ -59,9 +59,9 @@ class ViewController: UIViewController {
         }
         else {
             let alert = UIAlertController(title: "End of the Quiz", message: "Do you wanna start over?", preferredStyle: .alert)
-            let restartAction = UIAlertAction(title: "Restart", style: .default) { (UIAlertAction) in
+            let restartAction = UIAlertAction(title: "Restart", style: .default, handler: { (UIAlertAction) in
                 self.startOver()
-            }
+            })
             alert.addAction(restartAction)
             present(alert, animated: true, completion: nil)
         }
@@ -72,11 +72,11 @@ class ViewController: UIViewController {
         let correctAnswer = allQuestions.list[questionNumber].answer
         
         if correctAnswer == pickedAnswer {
-            print("correct")
+            ProgressHUD.showSuccess("Correct")
             score += 1
         }
         else {
-            print("wrong")
+            ProgressHUD.showError("Wrong")
         }
     }
     
