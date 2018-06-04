@@ -46,14 +46,14 @@ class ViewController: UIViewController {
     
     func updateUI() {
         scoreLabel.text = "Score: \(score)"
-        progressLabel.text = "\(questionNumber + 1) / 13"
+        progressLabel.text = "\(questionNumber + 1) / \(allQuestions.list.count)"
         
-        progressBar.frame.size.width = (view.frame.size.width / 13) * CGFloat(questionNumber + 1)
+        progressBar.frame.size.width = (view.frame.size.width / CGFloat(allQuestions.list.count)) * CGFloat(questionNumber + 1)
     }
     
 
     func nextQuestion() {
-        if questionNumber <= 12 {
+        if questionNumber <= allQuestions.list.count - 1 {
             questionLabel.text = allQuestions.list[questionNumber].questionText
             updateUI()
         }
@@ -69,6 +69,12 @@ class ViewController: UIViewController {
     
     
     func checkAnswer() {
+        
+        if questionNumber == allQuestions.list.count - 1 {
+            print("game finished, nothing to check")
+            return
+        }
+        
         let correctAnswer = allQuestions.list[questionNumber].answer
         
         if correctAnswer == pickedAnswer {
